@@ -76,6 +76,10 @@ const useStyles = makeStyles((theme) => ({
   formGrid: {
     width: "100%",
   },
+
+  tabs: {
+    width: "200px",
+  },
 }));
 
 function Summary() {
@@ -165,6 +169,7 @@ export default function Dashboard() {
                   value={tabIndex}
                   onChange={handleChange}
                   aria-label="Vertical tabs"
+                  className={classes.tabs}
                 >
                   {tables.map((text, index) => (
                     <Tab
