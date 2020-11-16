@@ -96,11 +96,6 @@ const useStyles = makeStyles((theme) => ({
   indicator: {
     backgroundColor: deepOrange["A400"],
   },
-  active_tabStyle: {
-    color: deepOrange["A400"],
-    backgroundColor: "#121858",
-  },
-  default_tabStyle: {},
 }));
 
 function TabPanel(props) {
@@ -114,11 +109,7 @@ function TabPanel(props) {
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
-      {tabIndex === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {tabIndex === index && <Box p={3}>{children}</Box>}
     </div>
   );
 }

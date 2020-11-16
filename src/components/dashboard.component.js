@@ -3,13 +3,11 @@ import {
   Paper,
   Grid,
   responsiveFontSizes,
-  Container,
   Box,
   Typography,
   Tab,
   Tabs,
   TextField,
-  GridList,
   Button,
   ThemeProvider,
 } from "@material-ui/core";
@@ -119,11 +117,7 @@ function TabPanel(props) {
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box p={3}>{children}</Box>}
     </div>
   );
 }
@@ -142,7 +136,7 @@ export default function Dashboard() {
     setTabIndex(newValue);
   };
 
-  const tables = ["Books", "Members"];
+  const tables = ["Books", "Members", "Returns"];
   return (
     <ThemeProvider theme={theme}>
       <Grid container justify="center" spacing={4}>
@@ -235,6 +229,27 @@ export default function Dashboard() {
                     </Grid>
                     <Grid item xs="12">
                       <TextField variant="outlined" label="Type" />
+                    </Grid>
+                    <Grid item xs="12">
+                      <Button variant="contained" color="secondary">
+                        Submit
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </TabPanel>
+                <TabPanel value={tabIndex} index={2} style={{ width: "100%" }}>
+                  <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                    spacing={2}
+                  >
+                    <Grid item xs="12">
+                      <TextField variant="outlined" label="Name" />
+                    </Grid>
+                    <Grid item xs="12">
+                      <TextField variant="outlined" label="Book" />
                     </Grid>
                     <Grid item xs="12">
                       <Button variant="contained" color="secondary">
