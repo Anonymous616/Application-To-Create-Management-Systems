@@ -26,9 +26,9 @@ const theme = responsiveFontSizes(
         contrastText: "#fff",
       },
       secondary: {
-        light: "#ff6333",
+        light: "#b22a00",
         main: "#ff3d00",
-        dark: "#b22a00",
+        dark: "#ff6333",
         contrastText: "#000",
       },
     },

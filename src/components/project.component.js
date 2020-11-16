@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {
   AppBar,
   CssBaseline,
@@ -14,25 +13,28 @@ import {
   ListItemText,
   Drawer,
   ThemeProvider,
-  Button,
   Tabs,
   Tab,
   Box,
 } from "@material-ui/core";
 import {
-  Menu,
-  Dashboard,
-  Folder,
-  LibraryBooks,
-  Equalizer,
-  ArrowBack,
+  Menu as MenuIcon,
+  Dashboard as DashboardIcon,
+  Folder as FolderIcon,
+  LibraryBooks as LibraryBooksIcon,
+  Equalizer as EqualizerIcon,
+  ArrowBack as ArrowBackIcon,
 } from "@material-ui/icons";
 import {
   makeStyles,
   createMuiTheme,
   responsiveFontSizes,
 } from "@material-ui/core/styles";
-import { indigo } from "@material-ui/core/colors";
+import { deepOrange, indigo } from "@material-ui/core/colors";
+import DashboardComponent from "./dashboard.component";
+import FoldersComponent from "./folders.component";
+import FormsComponent from "./forms.component";
+import APIComponent from "./api.component";
 
 const drawerWidth = 200;
 
@@ -76,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fbfbfb",
     color: indigo[900],
   },
-  menuButton: {
+  menuIconButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up("sm")]: {
       display: "none",
@@ -91,20 +93,28 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  indicator: {
+    backgroundColor: deepOrange["A400"],
+  },
+  active_tabStyle: {
+    color: deepOrange["A400"],
+    backgroundColor: "#121858",
+  },
+  default_tabStyle: {},
 }));
 
 function TabPanel(props) {
-  const { children, TabIndex, index, ...other } = props;
+  const { children, tabIndex, index, ...other } = props;
 
   return (
     <div
       role="tabpanel"
-      hidden={TabIndex !== index}
+      hidden={tabIndex !== index}
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
-      {TabIndex === index && (
+      {tabIndex === index && (
         <Box p={3}>
           <Typography>{children}</Typography>
         </Box>
@@ -137,6 +147,12 @@ function Project(props) {
   function currentTitle() {
     if (tabIndex === 0) {
       return <h1>Dashboard</h1>;
+    } else if (tabIndex === 1) {
+      return <h1>Folders</h1>;
+    } else if (tabIndex === 2) {
+      return <h1>Forms</h1>;
+    } else if (tabIndex === 3) {
+      return <h1>API</h1>;
     }
   }
 
@@ -147,21 +163,51 @@ function Project(props) {
       <Tabs
         orientation="vertical"
         variant="scrollable"
+        classes={{
+          indicator: classes.indicator,
+        }}
         value={tabIndex}
         onChange={handleChange}
         aria-label="Vertical tabs example"
-        className={classes.tabs}
       >
-        <Tab icon={<Dashboard />} label="Dashboard" {...a11yProps(0)} />
-        <Tab icon={<Folder />} label="Folders" {...a11yProps(1)} />
-        <Tab icon={<LibraryBooks />} label="Forms" {...a11yProps(2)} />
-        <Tab icon={<Equalizer />} label="API" {...a11yProps(3)} />
+        <Tab
+          className={
+            tabIndex === 0 ? classes.active_tabStyle : classes.default_tabStyle
+          }
+          icon={<DashboardIcon />}
+          label="Dashboard"
+          {...a11yProps(0)}
+        />
+        <Tab
+          className={
+            tabIndex === 1 ? classes.active_tabStyle : classes.default_tabStyle
+          }
+          icon={<FolderIcon />}
+          label="Folders"
+          {...a11yProps(1)}
+        />
+        <Tab
+          className={
+            tabIndex === 2 ? classes.active_tabStyle : classes.default_tabStyle
+          }
+          icon={<LibraryBooksIcon />}
+          label="Forms"
+          {...a11yProps(2)}
+        />
+        <Tab
+          className={
+            tabIndex === 3 ? classes.active_tabStyle : classes.default_tabStyle
+          }
+          icon={<EqualizerIcon />}
+          label="API"
+          {...a11yProps(3)}
+        />
       </Tabs>
       <Divider />
       <List>
         <ListItem button key="Back To Projects">
           <ListItemIcon>
-            <ArrowBack />
+            <ArrowBackIcon />
           </ListItemIcon>
           <ListItemText primary="Back To Projects" />
         </ListItem>
@@ -183,11 +229,11 @@ function Project(props) {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              className={classes.menuButton}
+              className={classes.menuIconButton}
             >
-              <Menu />
+              <MenuIcon />
             </IconButton>
-            {currentTitle}
+            {currentTitle()}
           </Toolbar>
         </AppBar>
         <nav className={classes.drawer}>
@@ -222,30 +268,22 @@ function Project(props) {
         </nav>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <TabPanel TabIndex={tabIndex} index={0}>
-            Item One
+          <TabPanel tabIndex={tabIndex} index={0}>
+            <DashboardComponent />
           </TabPanel>
-          <TabPanel TabIndex={tabIndex} index={1}>
-            Item Two
+          <TabPanel tabIndex={tabIndex} index={1}>
+            <FoldersComponent />
           </TabPanel>
-          <TabPanel TabIndex={tabIndex} index={2}>
-            Item Three
+          <TabPanel tabIndex={tabIndex} index={2}>
+            <FormsComponent />
           </TabPanel>
-          <TabPanel TabIndex={tabIndex} index={3}>
-            Item Four
+          <TabPanel tabIndex={tabIndex} index={3}>
+            <APIComponent />
           </TabPanel>
         </main>
       </div>
     </ThemeProvider>
   );
 }
-
-Project.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
-};
 
 export default Project;
