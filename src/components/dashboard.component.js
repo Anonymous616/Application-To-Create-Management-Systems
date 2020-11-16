@@ -61,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
     padding: "20px",
   },
   tablesContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     padding: "20px",
   },
   tabPane: {
@@ -72,11 +75,6 @@ const useStyles = makeStyles((theme) => ({
   },
   formGrid: {
     width: "100%",
-  },
-
-  tabs: {
-    width: "100%",
-    borderRight: `1px solid ${theme.palette.divider}`,
   },
 }));
 
@@ -151,12 +149,7 @@ export default function Dashboard() {
         </Grid>
         <Grid item xs={12}>
           <Paper elevation={3}>
-            <Grid
-              container
-              className={classes.tablesContainer}
-              justify="center"
-              spacing={1}
-            >
+            <Grid container className={classes.tablesContainer} spacing={1}>
               <Grid item xs={12}>
                 <Typography style={{ textAlign: "center" }} variant="h5">
                   Tables
@@ -165,14 +158,13 @@ export default function Dashboard() {
               <Grid item xs={12} className={classes.dividerContainer}>
                 <Box className={classes.divider} />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} className={classes.tablesContainer}>
                 <Tabs
                   orientation="vertical"
                   variant="scrollable"
                   value={tabIndex}
                   onChange={handleChange}
                   aria-label="Vertical tabs"
-                  className={classes.tabs}
                 >
                   {tables.map((text, index) => (
                     <Tab
