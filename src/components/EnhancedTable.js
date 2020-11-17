@@ -289,7 +289,6 @@ export default function EnhancedTable(props) {
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
-
                   return (
                     <TableRow
                       hover
@@ -306,6 +305,7 @@ export default function EnhancedTable(props) {
                           inputProps={{ "aria-labelledby": labelId }}
                         />
                       </TableCell>
+
                       <TableCell
                         component="th"
                         id={labelId}
@@ -314,10 +314,10 @@ export default function EnhancedTable(props) {
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="left">{row.calories}</TableCell>
+                      <TableCell align="left">{row.fat}</TableCell>
+                      <TableCell align="left">{row.carbs}</TableCell>
+                      <TableCell align="left">{row.protein}</TableCell>
                     </TableRow>
                   );
                 })}

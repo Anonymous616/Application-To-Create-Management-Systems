@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import EnhancedTable from "./EnhancedTable";
 
@@ -19,10 +18,10 @@ const headCells = [
     disablePadding: true,
     label: "Dessert",
   },
-  { id: "calories", numeric: false, disablePadding: false, label: "Calories" },
-  { id: "fat", numeric: false, disablePadding: true, label: "Fat (g)" },
-  { id: "carbs", numeric: false, disablePadding: true, label: "Carbs (g)" },
-  { id: "protein", numeric: false, disablePadding: true, label: "Protein (g)" },
+  { id: "calories", numeric: true, disablePadding: false, label: "Calories" },
+  { id: "fat", numeric: true, disablePadding: false, label: "Fat (g)" },
+  { id: "carbs", numeric: true, disablePadding: true, label: "Carbs (g)" },
+  { id: "protein", numeric: true, disablePadding: true, label: "Protein (g)" },
 ];
 let rows = [
   createData("Cupcake", 305, 3.7, 67, 4.3),
